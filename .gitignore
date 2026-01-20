@@ -1,0 +1,8 @@
+# Ignore figure images
+*.png
+
+# Ignore AnnData files
+*.h5ad
+
+# Ignore CSV outputs
+*.csv
