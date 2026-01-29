@@ -5,7 +5,7 @@ transfer cell-type labels to a target timepoint (e.g. timepoint 5)
 in an AnnData object.
 """
 
-from .data_utils import load_anndata, split_timepoints
+from .data_utils import load_anndata, split_timepoints, extract_xy, extract_x_target
 from .feature_selection import (
     compute_feature_importance,
     create_feature_groups,
@@ -19,6 +19,8 @@ from .model import TrainedModelBundle, load_hyperparameters_from_json, predict_t
 __all__ = [
     "load_anndata",
     "split_timepoints",
+    "extract_xy",
+    "extract_x_target",
     "train_classifier",
     "predict_timepoint",
     "TrainedModelBundle",
