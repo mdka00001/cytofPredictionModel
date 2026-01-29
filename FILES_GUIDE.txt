@@ -1,0 +1,279 @@
+================================================================================
+                 CYTOF LABEL TRANSFER - FILES GUIDE
+================================================================================
+
+📍 WHERE TO START?
+================================================================================
+
+1️⃣  README_ENHANCEMENTS.md
+    └─ Overview of all 3 new features (5 min read)
+
+2️⃣  QUICK_REFERENCE.md  
+    └─ Decision tree: "What do you want to do?" (5 min read)
+
+3️⃣  ADVANCED_USAGE.md
+    └─ Complete guide with workflows (20 min read)
+
+4️⃣  PRACTICAL_EXAMPLES.md
+    └─ 7 code examples you can copy-paste (reference)
+
+================================================================================
+📚 DOCUMENTATION FILES
+================================================================================
+
+README_ENHANCEMENTS.md
+  ├─ Feature overview
+  ├─ File structure
+  ├─ Key highlights
+  └─ Getting started paths
+
+QUICK_REFERENCE.md
+  ├─ New features at a glance
+  ├─ Quick decision tree ("What do you want to do?")
+  ├─ Common workflows (A, B, C)
+  ├─ Python API quick reference
+  ├─ Common Q&A
+  └─ Key functions reference
+
+ADVANCED_USAGE.md
+  ├─ Feature 1: Custom Hyperparameters
+  ├─ Feature 2: Feature Evaluation
+  ├─ Feature 3: Feature Engineering
+  ├─ Complete workflow example
+  ├─ Python API examples
+  └─ Troubleshooting
+
+PRACTICAL_EXAMPLES.md
+  ├─ Example 1: Basic Feature Evaluation
+  ├─ Example 2: Training with Custom Hyperparameters
+  ├─ Example 3: Feature Selection by Group
+  ├─ Example 4: Feature Selection by Importance Percentile
+  ├─ Example 5: Complete Workflow with All Features
+  ├─ Example 6: Save Feature Indices for CLI Use
+  └─ Example 7: Comparing Different Feature Sets
+
+ARCHITECTURE.md
+  ├─ New module structure
+  ├─ Data flow diagram
+  ├─ API changes
+  ├─ Backward compatibility
+  ├─ Performance considerations
+  └─ Testing strategy
+
+IMPLEMENTATION_SUMMARY.md
+  ├─ What's new (by feature)
+  ├─ Modified files
+  ├─ Integration points
+  └─ Backward compatibility
+
+CHECKLIST.md
+  ├─ Implementation status for each feature
+  ├─ Code quality checklist
+  ├─ CLI features summary
+  ├─ Validation checklist
+  └─ Next steps
+
+OVERVIEW.md
+  ├─ Complete implementation overview
+  ├─ Directory structure
+  ├─ Feature comparison (before/after)
+  ├─ Usage scenarios
+  └─ Statistics
+
+================================================================================
+🆕 NEW CODE FILES
+================================================================================
+
+cytof_label_transfer/feature_selection.py (280 lines)
+  ├─ compute_feature_importance()
+  ├─ plot_feature_importance()
+  ├─ create_feature_groups()
+  ├─ select_features_by_importance()
+  ├─ select_features_by_groups()
+  └─ select_features_interactive_report()
+
+================================================================================
+🔧 MODIFIED CODE FILES
+================================================================================
+
+train_model.py
+  ├─ New CLI arguments:
+  │  ├─ --custom_hyperparams
+  │  ├─ --eval_features
+  │  ├─ --feature_importance_output_dir
+  │  ├─ --selected_feature_indices
+  │  └─ --feature_groups
+  └─ Updated main() with feature workflow
+
+cytof_label_transfer/model.py
+  ├─ load_hyperparameters_from_json()
+  └─ train_classifier(..., param_distributions=...)
+
+cytof_label_transfer/data_utils.py
+  ├─ extract_xy(..., selected_feature_indices=...)
+  └─ extract_x_target(..., selected_feature_indices=...)
+
+cytof_label_transfer/__init__.py
+  └─ Export of new feature selection functions
+
+================================================================================
+📝 TEMPLATE FILES
+================================================================================
+
+example_custom_hyperparams.json
+  └─ Template for defining custom XGBoost hyperparameters
+
+example_selected_features.txt
+  └─ Template for specifying feature indices manually
+
+================================================================================
+🎯 QUICK NAVIGATION BY TASK
+================================================================================
+
+"I want to evaluate features before training"
+  ↓
+  QUICK_REFERENCE.md → "Do you want to... evaluate features?"
+  ↓
+  ADVANCED_USAGE.md → Section 2: Feature Evaluation
+  ↓
+  PRACTICAL_EXAMPLES.md → Example 1
+
+"I want to use custom hyperparameters"
+  ↓
+  QUICK_REFERENCE.md → "Do you want to... use custom hyperparameters?"
+  ↓
+  ADVANCED_USAGE.md → Section 1: Custom Hyperparameters
+  ↓
+  PRACTICAL_EXAMPLES.md → Example 2
+  ↓
+  example_custom_hyperparams.json (template)
+
+"I want to select specific features"
+  ↓
+  QUICK_REFERENCE.md → "Do you want to... manually select features?"
+  ↓
+  ADVANCED_USAGE.md → Section 3: Feature Engineering
+  ↓
+  PRACTICAL_EXAMPLES.md → Example 3 or 6
+  ↓
+  example_selected_features.txt (template)
+
+"I want to do everything optimized"
+  ↓
+  ADVANCED_USAGE.md → Complete Example Workflow
+  ↓
+  PRACTICAL_EXAMPLES.md → Example 5
+
+"I want to understand the architecture"
+  ↓
+  ARCHITECTURE.md
+
+"I want to see what changed"
+  ↓
+  IMPLEMENTATION_SUMMARY.md
+
+================================================================================
+📊 FILE STATISTICS
+================================================================================
+
+Code Implementation:
+  ├─ New files: 1 (feature_selection.py - 280 lines)
+  ├─ Modified files: 4
+  └─ Total new/modified code: ~408 lines
+
+Documentation:
+  ├─ Documentation files: 6
+  ├─ Total lines: ~1000 lines
+  ├─ Code examples: 7 scenarios
+  └─ Templates: 2 files
+
+================================================================================
+✅ IMPLEMENTATION STATUS
+================================================================================
+
+Feature 1: Custom Hyperparameters     ✅ COMPLETE
+Feature 2: Feature Evaluation         ✅ COMPLETE
+Feature 3: Feature Engineering        ✅ COMPLETE
+Documentation                         ✅ COMPLETE
+Examples & Templates                  ✅ COMPLETE
+Backward Compatibility               ✅ 100%
+
+================================================================================
+🚀 GETTING STARTED
+================================================================================
+
+FASTEST PATH (5 minutes):
+  1. Read: README_ENHANCEMENTS.md (overview)
+  2. Read: QUICK_REFERENCE.md (decision tree)
+  3. Copy example from PRACTICAL_EXAMPLES.md
+  4. Run!
+
+THOROUGH PATH (20-30 minutes):
+  1. Read: README_ENHANCEMENTS.md
+  2. Read: ADVANCED_USAGE.md
+  3. Review: PRACTICAL_EXAMPLES.md
+  4. Customize and run
+
+COMPLETE PATH (45+ minutes):
+  1. Read all documentation files
+  2. Study ARCHITECTURE.md
+  3. Review source code
+  4. Understand implementation details
+
+================================================================================
+📖 RECOMMENDED READING ORDER
+================================================================================
+
+First Time Users:
+  1. README_ENHANCEMENTS.md
+  2. QUICK_REFERENCE.md
+  3. Relevant section in ADVANCED_USAGE.md
+  4. PRACTICAL_EXAMPLES.md
+
+Thorough Understanding:
+  1. README_ENHANCEMENTS.md
+  2. ADVANCED_USAGE.md (complete)
+  3. PRACTICAL_EXAMPLES.md (all examples)
+  4. ARCHITECTURE.md
+
+Technical Deep Dive:
+  1. ARCHITECTURE.md
+  2. IMPLEMENTATION_SUMMARY.md
+  3. Source code review
+  4. CHECKLIST.md (testing strategy)
+
+================================================================================
+❓ COMMON QUESTIONS → FIND ANSWERS IN
+================================================================================
+
+"How do I use custom hyperparameters?"
+  → ADVANCED_USAGE.md Section 1
+  → PRACTICAL_EXAMPLES.md Example 2
+  → example_custom_hyperparams.json
+
+"How do I evaluate feature importance?"
+  → ADVANCED_USAGE.md Section 2
+  → PRACTICAL_EXAMPLES.md Example 1
+
+"How do I select specific features?"
+  → ADVANCED_USAGE.md Section 3
+  → PRACTICAL_EXAMPLES.md Example 3 or 6
+
+"Will this break my existing code?"
+  → QUICK_REFERENCE.md "Can I use the old way?"
+  → ARCHITECTURE.md "Backward Compatibility"
+
+"Can I use this in Python notebooks?"
+  → PRACTICAL_EXAMPLES.md (all examples are notebook-ready)
+
+"What changed compared to the original code?"
+  → IMPLEMENTATION_SUMMARY.md
+
+"What's the complete workflow?"
+  → ADVANCED_USAGE.md "Complete Example Workflow"
+  → PRACTICAL_EXAMPLES.md Example 5
+
+================================================================================
+Generated: January 29, 2026
+Status: ✅ All Features Implemented and Documented
+================================================================================

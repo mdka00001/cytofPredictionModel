@@ -51,7 +51,7 @@ def split_timepoints(
 
     obs = adata.obs
     train_mask = obs[time_col].isin(train_timepoints)
-    target_mask = obs[time_col] == target_timepoint
+    target_mask = obs[time_col].isin([target_timepoint])
 
     adata_train = adata[train_mask].copy()
     adata_target = adata[target_mask].copy()
@@ -118,6 +118,7 @@ def extract_xy(
     use_layer: str | None = None,
     feature_mask: np.ndarray | None = None,
     use_obsm_key: str | None = None,
+    selected_feature_indices: np.ndarray | None = None,
 ) -> Tuple[np.ndarray, np.ndarray, List[str]]:
     """Extract feature matrix X and label vector y from AnnData.
 
@@ -134,6 +135,9 @@ def extract_xy(
     use_obsm_key:
         If not None, append features from `adata.obsm[use_obsm_key]`
         (e.g. a scVI latent space) to the expression features.
+    selected_feature_indices:
+        Optional array of feature indices to select after feature construction.
+        Useful for selecting top features by importance or by group.
 
     Returns
     -------
@@ -153,6 +157,11 @@ def extract_xy(
     X, latent_names = _append_latent_features(X, adata, obsm_key=use_obsm_key)
     feature_names = expr_names + latent_names
 
+    # Apply selected feature indices if provided
+    if selected_feature_indices is not None:
+        X = X[:, selected_feature_indices]
+        feature_names = [feature_names[i] for i in selected_feature_indices]
+
     y = adata.obs[label_col].astype(str).to_numpy()
 
     return X, y, feature_names
@@ -163,6 +172,7 @@ def extract_x_target(
     use_layer: str | None = None,
     feature_mask: np.ndarray | None = None,
     use_obsm_key: str | None = None,
+    selected_feature_indices: np.ndarray | None = None,
 ) -> Tuple[np.ndarray, List[str]]:
     """Extract feature matrix for the target timepoint.
 
@@ -176,6 +186,8 @@ def extract_x_target(
         Optional boolean mask over variables to match training features.
     use_obsm_key:
         If not None, append features from `adata.obsm[use_obsm_key]`.
+    selected_feature_indices:
+        Optional array of feature indices to select (must match training).
     """
 
     X = _get_expression_matrix(adata, use_layer=use_layer)
@@ -188,5 +200,10 @@ def extract_x_target(
 
     X, latent_names = _append_latent_features(X, adata, obsm_key=use_obsm_key)
     feature_names = expr_names + latent_names
+
+    # Apply selected feature indices if provided
+    if selected_feature_indices is not None:
+        X = X[:, selected_feature_indices]
+        feature_names = [feature_names[i] for i in selected_feature_indices]
 
     return X, feature_names

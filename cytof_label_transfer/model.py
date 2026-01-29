@@ -77,6 +77,53 @@ def _default_param_distributions() -> Dict[str, Any]:
     }
 
 
+def load_hyperparameters_from_json(
+    json_path: str | Path,
+) -> Dict[str, Any]:
+    """Load custom hyperparameters from a JSON file.
+
+    The JSON file should contain a single dictionary with hyperparameter
+    settings. These can be either point estimates (for fixed_params) or
+    distributions (for randomized search).
+
+    Parameters
+    ----------
+    json_path:
+        Path to a JSON file containing hyperparameter definitions.
+
+    Returns
+    -------
+    hyperparameters:
+        Dictionary of hyperparameters.
+
+    Example
+    -------
+    File content (custom_params.json):
+    {
+        "n_estimators": [800, 1000],
+        "max_depth": [8, 10, 12],
+        "learning_rate": [0.05, 0.1, 0.15],
+        "subsample": [0.7, 0.9],
+        "colsample_bytree": [0.5],
+        "min_child_weight": [1],
+        "gamma": [0.0]
+    }
+    """
+    import json
+
+    json_path = Path(json_path)
+    if not json_path.exists():
+        raise FileNotFoundError(f"Hyperparameter file not found: {json_path}")
+
+    with json_path.open("r") as f:
+        params = json.load(f)
+
+    if not isinstance(params, dict):
+        raise ValueError("JSON file must contain a single dictionary")
+
+    return params
+
+
 def train_classifier_fixed_params(
     X: np.ndarray,
     y: np.ndarray,
@@ -178,6 +225,7 @@ def train_classifier(
     n_jobs: int = -1,
     output_dir: str | Path = "models",
     use_gpu: bool = False,
+    param_distributions: Optional[Dict[str, Any]] = None,
 ) -> TrainedModelBundle:
     """Train an optimized classifier with cross-validated hyperparameter search.
 
@@ -202,6 +250,9 @@ def train_classifier(
     use_gpu:
         If True, request GPU acceleration via ``device='cuda'`` in XGBoost
         (requires a GPU-enabled XGBoost build and compatible CUDA drivers).
+    param_distributions:
+        Optional custom parameter distributions. If None, uses default distributions.
+        Can also be a single dict of fixed parameters (all values must be scalars).
 
     Returns
     -------
@@ -223,7 +274,8 @@ def train_classifier(
     tree_method = "hist"
     device: Optional[str] = "cuda" if use_gpu else "cpu"
 
-    param_distributions = _default_param_distributions()
+    if param_distributions is None:
+        param_distributions = _default_param_distributions()
 
     cv = StratifiedKFold(
         n_splits=n_splits,

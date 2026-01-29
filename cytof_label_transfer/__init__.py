@@ -6,7 +6,15 @@ in an AnnData object.
 """
 
 from .data_utils import load_anndata, split_timepoints
-from .model import TrainedModelBundle, predict_timepoint, train_classifier
+from .feature_selection import (
+    compute_feature_importance,
+    create_feature_groups,
+    plot_feature_importance,
+    select_features_by_groups,
+    select_features_by_importance,
+    select_features_interactive_report,
+)
+from .model import TrainedModelBundle, load_hyperparameters_from_json, predict_timepoint, train_classifier
 
 __all__ = [
     "load_anndata",
@@ -14,4 +22,11 @@ __all__ = [
     "train_classifier",
     "predict_timepoint",
     "TrainedModelBundle",
+    "load_hyperparameters_from_json",
+    "compute_feature_importance",
+    "create_feature_groups",
+    "plot_feature_importance",
+    "select_features_by_groups",
+    "select_features_by_importance",
+    "select_features_interactive_report",
 ]
