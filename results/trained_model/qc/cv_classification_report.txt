@@ -1,0 +1,13 @@
+              precision    recall  f1-score   support
+
+      B_cell       0.89      0.85      0.87     34972
+ Endothelial       0.92      0.91      0.91      9670
+        FDCs       0.98      0.96      0.97      1597
+     Myeloid       0.90      0.90      0.90     68657
+      Stroma       0.97      0.98      0.98     65319
+      T_cell       0.92      0.93      0.92     88284
+         Tfh       0.88      0.55      0.68       201
+
+    accuracy                           0.92    268700
+   macro avg       0.92      0.87      0.89    268700
+weighted avg       0.92      0.92      0.92    268700
