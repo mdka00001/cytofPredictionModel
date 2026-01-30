@@ -160,6 +160,6 @@ scikit-learn model (e.g. RandomForest, XGBoost) if you want to
 experiment with alternative approaches while keeping the same data
 handling and QC framework.
 
-For a detailed analysis workflow tutorial. please check the [jupyter notebook]([https://pages.github.com/](https://github.com/mdka00001/cytofPredictionModel/blob/main/cytof_label_transfer_advanced_workflow.ipynb)) file.
+For a detailed analysis workflow tutorial. please check the [jupyter notebook](https://github.com/mdka00001/cytofPredictionModel/blob/main/cytof_label_transfer_advanced_workflow.ipynb) file.
 
 
